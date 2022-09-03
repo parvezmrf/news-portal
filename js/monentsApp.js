@@ -33,14 +33,40 @@ const showNewsMenu = async () => {
 
 }
 
-const url = 'https://openapi.programming-hero.com/api/news/category/'
 
-function loadNews(id) {
-    console.log(id)
-    console.log(url)
+const newsBodySection = document.getElementById('news-body-section');
+
+
+const loadNews = async id => {
+    const newsClickLink = await fetch(`https://openapi.programming-hero.com/api/news/category/0${id}`)
+    const clickLinkDataJSON = await newsClickLink.json();
+    const clickLinkDataArray = clickLinkDataJSON.data;
+    console.log(clickLinkDataArray);
+    console.log(clickLinkDataArray.length);
+    // console.log(clickLinkDataArray.length);
+    if (clickLinkDataArray.length != 0) {
+        for (const neswBody of clickLinkDataArray) {
+            console.log(neswBody)
+            console.log(neswBody.title)
+            console.log(neswBody.thumbnail_url)
+            // console.log(neswBody.details)
+            console.log(neswBody.author.img)
+            console.log(neswBody.author.name)
+
+            console.log(neswBody.total_view)
+            console.log(neswBody._id)
+        }
+
+    }
+    else {
+        console.log('no data')
+    }
+
+
+
 }
 
-
+loadNews(05);
 
 
 // const loadNewsList = (id) => {
