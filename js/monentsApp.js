@@ -191,10 +191,6 @@ const loadNews = async id => {
 
 }
 
-loadNews(05);
-
-
-
-
+loadNews(08);
 loadNewsCategory()
 showNewsMenu()
