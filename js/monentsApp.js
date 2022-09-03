@@ -4,13 +4,11 @@ const loadNewsCategory = async () => {
     const allNews = newsData.data
     // console.log(allNews);
     return allNews;
-
 }
 
 const showNewsMenu = async () => {
     const newsList = await loadNewsCategory();
     const newsCategory = newsList.news_category;
-
 
     for (const singleCate of newsCategory) {
         const categoryTitle = singleCate.category_name;
@@ -37,7 +35,9 @@ const showNewsMenu = async () => {
 
 
 const loadNews = async id => {
-    const newsClickLink = await fetch(`https://openapi.programming-hero.com/api/news/category/0${id}`)
+    const newsClickLink = await fetch(`https://openapi.programming-hero.com/api/news/category/0${id}`);
+    const spinner = document.getElementById('spinner');
+    spinner.classList.remove('hidden')
     const clickLinkDataJSON = await newsClickLink.json();
     const clickLinkDataArray = clickLinkDataJSON.data;
     console.log(clickLinkDataArray);
@@ -103,7 +103,10 @@ const loadNews = async id => {
                         <p class="text-xl font-bold">${neswBody.total_view}M </p>
                     </div>
                     <img class="w-20" src="img/rating.png" alt="">
-                    <button class="btn btn-primary">---></button>
+                                 <label for="my-modal-5" class="btn btn-outline btn-primary">Read Details</label>
+
+
+
                 </div>
 
             </div>
@@ -131,6 +134,7 @@ const loadNews = async id => {
 
     }
 
+    spinner.classList.add('hidden')
 
 
 }
@@ -138,18 +142,7 @@ const loadNews = async id => {
 loadNews(05);
 
 
-// const loadNewsList = (id) => {
-//     const newsResponse = await fetch('https://openapi.programming-hero.com/api/news/category/01');
-//     const newsData = await newsResponse.json();
-
-//     console.log('2nd', newsData.data)
-
-// }
 
 
 loadNewsCategory()
 showNewsMenu()
-
-// loadNewsList()
-
-
