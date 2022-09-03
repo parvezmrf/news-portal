@@ -46,6 +46,9 @@ const loadNews = async id => {
     if (clickLinkDataArray.length != 0) {
         const newsBodySection = document.getElementById('news-body-section');
 
+        newsBodySection.textContent = ''
+
+
         for (const neswBody of clickLinkDataArray) {
             console.log(neswBody)
             console.log(neswBody.title)
@@ -57,16 +60,17 @@ const loadNews = async id => {
             console.log(neswBody.total_view)
             console.log(neswBody._id)
 
+
             const div = document.createElement('div');
 
             div.innerHTML = `
             <div class="bg-base-100 flex">
-            <div class="border-4 border-indigo-600 w-96">
+                <div class="border-4 border-indigo-600 w-96">
                 <img class="h-full" src="${neswBody.thumbnail_url}" alt="">
-            </div>
+                 </div>
 
 
-            <div class="pl-10 pr-10 pt-5">
+                 <div class="pl-10 pr-10 pt-5">
                 <h1 class="text-2xl pb-5 font-semibold">${neswBody.title}
                 </h1>
                 <p>${neswBody.details.length > 200 ? neswBody.details.slice(0, 250) + '.' : neswBody.details}</p>
@@ -93,7 +97,7 @@ const loadNews = async id => {
                 </div>
 
             </div>
-        </div>
+        
             `
 
             newsBodySection.appendChild(div)
@@ -102,7 +106,17 @@ const loadNews = async id => {
 
     }
     else {
-        console.log('no data')
+        const newsBodySection = document.getElementById('news-body-section');
+
+        newsBodySection.textContent = ''
+
+        const div = document.createElement('div');
+
+        div.innerHTML = `<h1 class="text-2xl pb-5 font-semibold">No News Found
+        </h1>`
+
+        newsBodySection.appendChild(div)
+
     }
 
 
