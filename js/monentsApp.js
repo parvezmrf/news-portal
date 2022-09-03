@@ -45,8 +45,18 @@ const loadNews = async id => {
     // console.log(clickLinkDataArray.length);
     if (clickLinkDataArray.length != 0) {
         const newsBodySection = document.getElementById('news-body-section');
-
         newsBodySection.textContent = ''
+
+        const newsCounter = document.getElementById('news-counter');
+        newsCounter.textContent = ''
+        const div = document.createElement('div')
+
+        div.innerHTML = `
+        <h1 class="text-2xl font-semibold text-center">${clickLinkDataArray.length} news Found</h1>
+        `
+
+        newsCounter.appendChild(div)
+
 
 
         for (const neswBody of clickLinkDataArray) {
@@ -107,15 +117,17 @@ const loadNews = async id => {
     }
     else {
         const newsBodySection = document.getElementById('news-body-section');
-
         newsBodySection.textContent = ''
 
-        const div = document.createElement('div');
+        const newsCounter = document.getElementById('news-counter');
+        newsCounter.textContent = ''
+        const div = document.createElement('div')
 
-        div.innerHTML = `<h1 class="text-2xl pb-5 font-semibold">No News Found
-        </h1>`
+        div.innerHTML = `
+        <h1 class="text-2xl font-semibold text-center">No news in this section</h1>
+        `
 
-        newsBodySection.appendChild(div)
+        newsCounter.appendChild(div)
 
     }
 
