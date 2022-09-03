@@ -31,7 +31,6 @@ const showNewsMenu = async () => {
 
 
 }
-//..............................
 
 const loadDetails = async newsid => {
     const newsDetailsData = await fetch(`https://openapi.programming-hero.com/api/news/${newsid}`);
@@ -69,7 +68,6 @@ const loadDetails = async newsid => {
 
 
 
-//..........................
 const loadNews = async id => {
     const newsClickLink = await fetch(`https://openapi.programming-hero.com/api/news/category/0${id}`);
 
@@ -81,14 +79,6 @@ const loadNews = async id => {
     // console.log(clickLinkDataArray);
 
     if (clickLinkDataArray.length != 0) {
-        //----------------------------------------------
-
-
-
-
-
-
-
 
         //------------------------------------------------------
         const newsBodySection = document.getElementById('news-body-section');
@@ -120,12 +110,13 @@ const loadNews = async id => {
             const { title, thumbnail_url, details, author, total_view, _id } = neswBody;
 
 
+
             const div = document.createElement('div');
 
             div.innerHTML = `
-            <div class="bg-base-100 flex">
+            <div class="bg-base-100 block lg:flex">
                 <div class="w-96">
-                <img class="h-full w-52" src="${thumbnail_url}" alt="">
+                <img class="h-full w-52 " src="${thumbnail_url}" alt="">
                  </div>
 
 
@@ -139,9 +130,10 @@ const loadNews = async id => {
                 ${details.length > 200 ? details.slice(250, 500) + '...' : details}
                 </p>
 
-                <div class="flex justify-between items-center py-5">
+                <div class="lg:flex justify-between items-center py-5">
                     <div class="flex items-center">
                         <img class="rounded-full h-12" src="${author.img}" alt="">
+                        
                         <div class="pl-5">
                             <p class="text-xl font-semibold">${author.name === null ? 'Author Not Found' : author.name}</p>
                             <p>${author.published_date === null ? 'No Date Found' : author.published_date}</p>
@@ -163,6 +155,7 @@ const loadNews = async id => {
             </div>
         
             `
+
 
             newsBodySection.appendChild(div);
 
