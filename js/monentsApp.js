@@ -34,7 +34,6 @@ const showNewsMenu = async () => {
 }
 
 
-const newsBodySection = document.getElementById('news-body-section');
 
 
 const loadNews = async id => {
@@ -45,6 +44,8 @@ const loadNews = async id => {
     console.log(clickLinkDataArray.length);
     // console.log(clickLinkDataArray.length);
     if (clickLinkDataArray.length != 0) {
+        const newsBodySection = document.getElementById('news-body-section');
+
         for (const neswBody of clickLinkDataArray) {
             console.log(neswBody)
             console.log(neswBody.title)
@@ -55,6 +56,48 @@ const loadNews = async id => {
 
             console.log(neswBody.total_view)
             console.log(neswBody._id)
+
+            const div = document.createElement('div');
+
+            div.innerHTML = `
+            <div class="bg-base-100 flex">
+            <div class="border-4 border-indigo-600 w-96">
+                <img class="h-full" src="${neswBody.thumbnail_url}" alt="">
+            </div>
+
+
+            <div class="pl-10 pr-10 pt-5">
+                <h1 class="text-2xl pb-5 font-semibold">${neswBody.title}
+                </h1>
+                <p>${neswBody.details.length > 200 ? neswBody.details.slice(0, 250) + '.' : neswBody.details}</p>
+
+                
+                <p class="pt-5">
+                ${neswBody.details.length > 200 ? neswBody.details.slice(250, 500) + '...' : neswBody.details}
+                </p>
+
+                <div class="flex justify-between items-center pt-5">
+                    <div class="flex items-center">
+                        <img class="rounded-full h-12" src="${neswBody.author.img}" alt="">
+                        <div class="pl-5">
+                            <p class="text-xl font-semibold"> ${neswBody.author.name}</p>
+                            <p>${neswBody.author.published_date}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <img class="w-10" src="img/view.svg" alt="">
+                        <p class="text-xl font-bold">${neswBody.total_view}M </p>
+                    </div>
+                    <img class="w-20" src="img/rating.png" alt="">
+                    <button class="btn btn-primary">---></button>
+                </div>
+
+            </div>
+        </div>
+            `
+
+            newsBodySection.appendChild(div)
+
         }
 
     }
