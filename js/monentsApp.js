@@ -40,8 +40,12 @@ const showNewsMenu = async () => {
 // for modal body
 const loadDetails = async newsid => {
     const newsDetailsData = await fetch(`https://openapi.programming-hero.com/api/news/${newsid}`);
+
     const newsDetailsDataJSON = await newsDetailsData.json();
-    const modalData = newsDetailsDataJSON.data[0]
+
+    const modalData = newsDetailsDataJSON.data[0];
+
+
 
     const modalBody = document.getElementById('modal-title');
     modalBody.innerHTML = `
@@ -75,6 +79,10 @@ const loadNews = async id => {
     const clickLinkDataJSON = await newsClickLink.json();
     const clickLinkDataArray = clickLinkDataJSON.data;
     // console.log(clickLinkDataArray);
+
+    clickLinkDataArray.sort((a, b) => {
+        return b.total_view - a.total_view;
+    });
 
     if (clickLinkDataArray.length != 0) {
 
