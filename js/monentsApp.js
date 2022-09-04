@@ -5,7 +5,6 @@ const loadNewsCategory = async () => {
         const newsResponse = await fetch(url);
         const newsData = await newsResponse.json();
         const allNews = newsData.data
-        // console.log(allNews);
         return allNews;
     }
     catch (error) {
@@ -14,7 +13,7 @@ const loadNewsCategory = async () => {
     }
 }
 
-
+// for category option
 const showNewsMenu = async () => {
     const newsList = await loadNewsCategory();
     const newsCategory = newsList.news_category;
@@ -22,12 +21,9 @@ const showNewsMenu = async () => {
     for (const singleCate of newsCategory) {
         const categoryTitle = singleCate.category_name;
         const categoryId = singleCate.category_id;
-        //  console.log(categoryTitle, categoryId)
-
         const categorySection = document.getElementById('news-category');
         const li = document.createElement('li')
-        li.innerHTML = `
-        
+        li.innerHTML = `        
        <button onclick="loadNews(${categoryId})" > ${categoryTitle}</button>
         `
         categorySection.appendChild(li);
@@ -40,14 +36,12 @@ const showNewsMenu = async () => {
 
 }
 
+
+// for modal body
 const loadDetails = async newsid => {
     const newsDetailsData = await fetch(`https://openapi.programming-hero.com/api/news/${newsid}`);
     const newsDetailsDataJSON = await newsDetailsData.json();
-
     const modalData = newsDetailsDataJSON.data[0]
-
-
-    console.log(modalData)
 
     const modalBody = document.getElementById('modal-title');
     modalBody.innerHTML = `
@@ -68,14 +62,8 @@ const loadDetails = async newsid => {
         </div>
     
     `
-    // console.log(modalBody.innerText)
-
-
 
 }
-
-
-
 
 
 const loadNews = async id => {
@@ -107,19 +95,8 @@ const loadNews = async id => {
 
 
         clickLinkDataArray.forEach(neswBody => {
-            // console.log(neswBody)
-            // console.log(neswBody.title)
-            // console.log(neswBody.thumbnail_url)
-            // // console.log(neswBody.details)
-            // console.log(neswBody.author.img)
-            // console.log(neswBody.author.name)
-
-            // console.log(neswBody.total_view)
-            // console.log(neswBody._id)
 
             const { title, thumbnail_url, details, author, total_view, _id } = neswBody;
-
-
 
             const div = document.createElement('div');
 
@@ -128,22 +105,17 @@ const loadNews = async id => {
                 <div class="w-96">
                 <img class="h-full w-52 " src="${thumbnail_url}" alt="">
                  </div>
-
-
                  <div class="pl-10 pr-10 pt-5">
                 <h1 class="text-2xl pb-5 font-semibold">${title}
                 </h1>
                 <p>${details.length > 200 ? neswBody.details.slice(0, 250) + '.' : details}</p>
-
                 
                 <p class="pt-5">
                 ${details.length > 200 ? details.slice(250, 500) + '...' : details}
                 </p>
-
                 <div class="lg:flex justify-between items-center py-5">
                     <div class="flex items-center">
-                        <img class="rounded-full h-12" src="${author.img}" alt="">
-                        
+                        <img class="rounded-full h-12" src="${author.img}" alt="">                        
                         <div class="pl-5">
                             <p class="text-xl font-semibold">${author.name === null ? 'Author Not Found' : author.name}</p>
                             <p>${author.published_date === null ? 'No Date Found' : author.published_date}</p>
@@ -153,31 +125,19 @@ const loadNews = async id => {
                         <img class="w-10" src="img/view.svg" alt="">
                         <p class="text-xl font-bold">${total_view === null || total_view === 0 ? 'No Views' : total_view}</p>
                     </div>
-
-
                     <img class="w-20" src="img/rating.png" alt="">
                                  <label for="my-modal-5" class="btn btn-outline btn-primary" onclick="loadDetails('${_id}')">Read Details</label>
-
-
-
                 </div>
 
             </div>
         
             `
 
-
             newsBodySection.appendChild(div);
 
-            //  here modal
 
 
         })
-
-
-
-
-
 
     }
     else {
@@ -191,14 +151,11 @@ const loadNews = async id => {
         div.innerHTML = `
         <h1 class="text-2xl font-semibold text-center">No news in this section</h1>
         `
-
         newsCounter.appendChild(div)
 
     }
 
     spinner.classList.add('hidden')
-
-
 }
 
 loadNews(08);
