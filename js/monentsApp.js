@@ -1,9 +1,17 @@
 const loadNewsCategory = async () => {
-    const newsResponse = await fetch('https://openapi.programming-hero.com/api/news/categories');
-    const newsData = await newsResponse.json();
-    const allNews = newsData.data
-    // console.log(allNews);
-    return allNews;
+    const url = `https://openapi.programming-hero.com/api/news/categories`;
+
+    try {
+        const newsResponse = await fetch(url);
+        const newsData = await newsResponse.json();
+        const allNews = newsData.data
+        // console.log(allNews);
+        return allNews;
+    }
+    catch (error) {
+        console.log(error)
+
+    }
 }
 
 
@@ -49,6 +57,8 @@ const loadDetails = async newsid => {
             <img class=" pb-5" src="${modalData.thumbnail_url}" alt="">
 
             <h3 class="font-bold text-lg">Author Name: ${modalData.author.name === null ? 'Not Found' : modalData.author.name}</h3>
+
+            <h3 class="font-semibold text-md">Views: ${modalData.total_view === null || modalData.total_view === 0 ? 'No Views' : modalData.total_view}</h3>
 
             <p class="py-4">${modalData.details}
             </p>
